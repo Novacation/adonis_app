@@ -44,4 +44,12 @@ export default class AuthenticationController {
       return response.badRequest('Invalid credentials');
     }
   }
+
+  public async logout({ response, auth }: HttpContextContract) {
+    await auth.use('api').revoke();
+
+    return response
+      .status(200)
+      .send("<h1 style='text-align: center; margin:'center'>Register Page</h1>");
+  }
 }

@@ -24,6 +24,8 @@ Route.group(() => {
   Route.post('/register', 'AuthenticationController.register').as('register');
 
   Route.post('/login', 'AuthenticationController.authenticate').as('login');
+
+  Route.post('/logout', 'AuthenticationController.logout').as('logout');
 })
   .prefix('/auth')
   .as('auth');
