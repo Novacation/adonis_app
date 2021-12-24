@@ -25,9 +25,13 @@ Route.group(() => {
 
   Route.post('/login', 'AuthenticationController.authenticate').as('login');
 
-  Route.post('/logout', 'AuthenticationController.logout').as('logout');
+  Route.delete('/logout', 'AuthenticationController.logout').as('logout');
 })
   .prefix('/auth')
   .as('auth');
 
 Route.get('/dashboard', 'DashboardController.index').as('index');
+
+Route.post('/favorite', 'FavoritesController.favorite').as('favorite');
+
+Route.post('/favoritebands', 'FavoritesController.getFavoriteBands').as('favoriteBands');

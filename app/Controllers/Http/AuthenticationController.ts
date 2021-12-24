@@ -16,8 +16,6 @@ export default class AuthenticationController {
       const token = await auth.use('api').generate(user, { expiresIn: '1days' });
       return token;
     } catch (error) {
-      console.log(error);
-
       return response.badRequest('Invalid credentials');
     }
   }
