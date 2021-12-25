@@ -48,5 +48,27 @@ export default class FavoritesController {
     }
   }
 
-  public async getFavoriteBands({}: HttpContextContract) {}
+  public async getFavoriteBands({ response, auth }: HttpContextContract) {
+    try {
+      const user = await auth.use('api').authenticate();
+
+      const favoriteBands = await Favorite.query().where('user', user.id);
+      const bandsNames: string[] = [];
+
+      for (const favBand of favoriteBands) {
+        const band = await Band.findBy('id', favBand.toJSON().band);
+
+        bandsNames.push(band!.name);
+      }
+
+      console.log(bandsNames);
+
+      return response.json(bandsNames);
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(401)
+        .send("<h1 style='text-align: center; margin:'center'>Register Page</h1>");
+    }
+  }
 }
